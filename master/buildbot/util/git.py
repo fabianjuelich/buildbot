@@ -67,6 +67,9 @@ def getSshCommand(keyPath, knownHostsPath):
 
 
 def scpStyleToUrlSyntax(address, port=22, scheme='ssh'):
+    if '://' in address:
+        # the address already has a URL syntax
+        return address
     host, path = address.split(':')
     return f'{scheme}://{host}:{port}/{path}'
 
